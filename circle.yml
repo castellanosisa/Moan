@@ -5,8 +5,8 @@ machine:
 deployment:
   staging:
     branch: master
-    heroku: 
-      appname: moan
+    heroku:
+      appname: foo-bar-123
 
 test:
   post:
