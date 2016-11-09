@@ -5,7 +5,6 @@
  */
 package moan.moan.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,11 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
@@ -34,7 +29,7 @@ public class Report implements java.io.Serializable {
     }
 
     public Report(Call call, Date reportDate, String description) {
-        this.call=call;
+        this.call = call;
         this.reportDate = reportDate;
         this.description = description;
     }
@@ -77,5 +72,6 @@ public class Report implements java.io.Serializable {
     public void setCall(Call call) {
         this.call = call;
     }
+
 
 }

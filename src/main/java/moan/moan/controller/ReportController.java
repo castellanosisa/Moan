@@ -5,7 +5,6 @@
  */
 package moan.moan.controller;
 
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,9 +25,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/reports")
 public class ReportController {
 
+    @RequestMapping(method = RequestMethod.GET)
+    public Set<Report> getReports() {
+        SessionFactory sf = getSessionFactory();
+        Session s = sf.openSession();
+        Transaction tx = s.beginTransaction();
+        Criteria criteria = s.createCriteria(Report.class);
+        List reports = criteria.list();
+        Set<Report> allreports = new HashSet<>(reports);
+        System.out.println("Reportes---->" + allreports.toString());
+        return allreports;
+
+    }
+
     @RequestMapping(value = "/{idUser}", method = RequestMethod.GET)
-    public Set<Report> getReports(@PathVariable("idUser") int idUser) {
-        System.out.println("Traer los reportes de ----------------------------------------" + idUser);
+    public Set<Report> getReportById(@PathVariable("idUser") int idUser) {
+        System.out.println("Traer los reportes de ----------------" + idUser);
         Set<Report> reportsUser = new HashSet<>();
         SessionFactory sf = getSessionFactory();
         Session s = sf.openSession();
@@ -47,7 +59,22 @@ public class ReportController {
 
         return reportsUser;
     }
+    
+    @RequestMapping(method = RequestMethod.POST)
+    public void setReport(@RequestBody Report report) {
+        System.out.println("Entro en setReport----------------------------------------");
+        System.out.println("ID report-------------" + report.getId());
+        SessionFactory sf = getSessionFactory();
+        Session s = sf.openSession();
+        Transaction tx = s.beginTransaction();       
+        
+        Report rep = new Report(report.getCall(), report.getReportDate(), report.getDescription());
 
+        s.save(rep);
+        tx.commit();
+        s.close();
+        sf.close();
+    }
     
     private SessionFactory getSessionFactory() {
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
