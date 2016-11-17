@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/reports")
+@RequestMapping(value = "/reportes")
 public class ReportController {
 
     @RequestMapping(method = RequestMethod.GET)
@@ -38,8 +38,8 @@ public class ReportController {
 
     }
 
-    @RequestMapping(value = "/{idUser}", method = RequestMethod.GET)
-    public Set<Report> getReportById(@PathVariable("idUser") int idUser) {
+    @RequestMapping(value = "/{idUsuario}", method = RequestMethod.GET)
+    public Set<Report> getReportById(@PathVariable("idUsuario") int idUser) {
         System.out.println("Traer los reportes de ----------------" + idUser);
         Set<Report> reportsUser = new HashSet<>();
         SessionFactory sf = getSessionFactory();
@@ -52,14 +52,14 @@ public class ReportController {
         Set<User> allUsers = new HashSet<>(users);
         Set<Report> allReports = new HashSet<>(reports);
         for (User t : allUsers) {
-            if (t.getDocNumber() == idUser) {
+            if (t.getNumero()== idUser) {
                 reportsUser = t.getMyReports();
             }
         }
 
         return reportsUser;
     }
-    
+   
     @RequestMapping(method = RequestMethod.POST)
     public void setReport(@RequestBody Report report) {
         System.out.println("Entro en setReport----------------------------------------");
@@ -68,7 +68,7 @@ public class ReportController {
         Session s = sf.openSession();
         Transaction tx = s.beginTransaction();       
         
-        Report rep = new Report(report.getCall(), report.getReportDate(), report.getDescription());
+        Report rep = new Report(report.getFecha(), report.getNumero(), report.getSexoVoz(), report.getAcento(), report.getPertenece(), report.getExigencia(), report.getDescripcion());
 
         s.save(rep);
         tx.commit();

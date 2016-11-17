@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping(value = "/calls")
+@RequestMapping(value = "/llamadas")
 public class CallController {
     
     @RequestMapping(method = RequestMethod.GET)

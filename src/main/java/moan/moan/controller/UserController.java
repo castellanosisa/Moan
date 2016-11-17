@@ -8,7 +8,6 @@ package moan.moan.controller;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import moan.moan.model.Report;
 import moan.moan.model.User;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -22,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping(value = "/usuarios")
 public class UserController {
 
     @RequestMapping(method = RequestMethod.GET)
@@ -38,7 +37,7 @@ public class UserController {
 
     }
     @RequestMapping(value = "/{idUser}", method = RequestMethod.GET)
-    public User getUserById(@PathVariable("idUser") int idUser) {
+    public User getUserById(@PathVariable("idUser") long idUser) {
         System.out.println("Traer los reportes de ----------------" + idUser);
         User user = new User();
         SessionFactory sf = getSessionFactory();
@@ -48,7 +47,7 @@ public class UserController {
         List allUsers = criteriaUser.list();
         Set<User> users = new HashSet<>(allUsers);
         for (User t : users) {
-            if (t.getDocNumber() == idUser) {
+            if (t.getNumero()== idUser) {
                 user=t;
             }
         }
@@ -59,7 +58,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST)
     public void setUser(@RequestBody User user) {
         System.out.println("Entro en setUser----------------------------------------");
-        System.out.println("ID-------------" + user.getDocNumber());
+        System.out.println("ID-------------" + user.getNumero());
         SessionFactory sf = getSessionFactory();
         Session s = sf.openSession();
         Transaction tx = s.beginTransaction();       

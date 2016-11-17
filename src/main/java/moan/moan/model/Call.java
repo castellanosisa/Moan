@@ -19,7 +19,7 @@ import javax.persistence.Table;
 //AUDIO
 //import javax.sound.sampled.*;
 @Entity
-@Table(name = "calls")
+@Table(name = "LLAMADAS")
 public class Call implements java.io.Serializable {
 
     //private _____ rec;
@@ -31,28 +31,45 @@ public class Call implements java.io.Serializable {
     private int id;
     //private AudioFileFormat.Type rec;
     //private Location location;
-    private String number;
-    private Date callDate;
-    private Report report;
+    private long numero;
+    private Date fecha;
+    private Report reporte;
 
-    public Call() {
+    public Call(long numero, Date fecha) {
+        this.numero = numero;
+        this.fecha = fecha;
     }
-
-    public Call(String number, Date callDate, Report report) {
-        this.number = number;
-        this.callDate = callDate;
-        this.report = report;
+    
+    public Call() {
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_call")
+    @Column(name = "ID_LLAMADA")
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Column(name = "NUMERO")
+    public long getNumero() {
+        return numero;
+    }
+
+    public void setNumero(long numero) {
+        this.numero = numero;
+    }
+    
+    @Column(name = "FECHA")
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     /**
@@ -65,32 +82,15 @@ public class Call implements java.io.Serializable {
      * public void setLocation(Location location) { this.location = location; }
      *
      */
-    @Column(name = "number")
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    @Column(name = "call_date")
-    public Date getCallDate() {
-        return callDate;
-    }
-
-    public void setCallDate(Date callDate) {
-        this.callDate = callDate;
-    }
-
+   
     @OneToOne
-    @JoinColumn(name = "report", nullable = false)
+    @JoinColumn(name = "REPORTE", nullable = false)
     @JsonIgnore
     public Report getReport() {
-        return report;
+        return reporte;
     }
 
-    public void setReport(Report report) {
-        this.report = report;
+    public void setReport(Report reporte) {
+        this.reporte = reporte;
     }
 }

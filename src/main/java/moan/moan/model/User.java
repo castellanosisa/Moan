@@ -18,77 +18,51 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "users")
+@Table(name = "USUARIOS")
 public class User implements java.io.Serializable {
-    
-    private int docNumber;
-    private String email;
-    private String number;
-    private String name;
-    private String docType;
+
+
+    private long numero;
+    private long imei;
+    private long simcard;
     private Set<Report> myReports;
 
     public User() {
     }
-
-    public User(int docNumber, String email, String number, String name, String docType) {
-        this.docNumber = docNumber;
-        this.email = email;
-        this.number = number;
-        this.name = name;
-        this.docType = docType;
-    }
-
-    @Column(name = "email")
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Column(name = "number")
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String phone) {
-        this.number = phone;
-    }
-
-    @Column(name = "name")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Column(name = "doc_type")
-    public String getDocType() {
-        return docType;
-    }
-
-    public void setDocType(String docType) {
-        this.docType = docType;
-    }
-
+    
     @Id
-    @Column(name = "doc_number")
-    public int getDocNumber() {
-        return docNumber;
+    @Column(name = "NUMERO")
+    public long getNumero() {
+        return numero;
     }
 
-    public void setDocNumber(int docNumber) {
-        this.docNumber = docNumber;
+    public void setNumero(long numero) {
+        this.numero = numero;
     }
 
-    @OneToMany(cascade =CascadeType.ALL)
-    @PrePersist 
+    @Column(name = "IMEI")
+    public long getImei() {
+        return imei;
+    }
+
+    public void setImei(long imei) {
+        this.imei = imei;
+    }
+
+    @Column(name = "SIMCARD")
+    public long getSimcard() {
+        return simcard;
+    }
+
+    public void setSimcard(long simcard) {
+        this.simcard = simcard;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @PrePersist
     @PreUpdate
-    @JoinColumns({@JoinColumn(name="user_id", nullable=false)})
+    @JoinColumns({
+    @JoinColumn(name = "USUARIO_ID", nullable = false)})
     public Set<Report> getMyReports() {
         return myReports;
     }
@@ -96,5 +70,5 @@ public class User implements java.io.Serializable {
     public void setMyReports(Set<Report> myReports) {
         this.myReports = myReports;
     }
-   
+
 }
