@@ -21,7 +21,6 @@ public class Report implements java.io.Serializable {
 
     private long id;
     private Call llamada;
-    private Date fecha;
     private long numero;
     private String sexoVoz;
     private String acento;
@@ -29,8 +28,8 @@ public class Report implements java.io.Serializable {
     private String exigencia;
     private String descripcion;
     
-    public Report(Date fecha, long numero, String sexoVoz, String acento, String pertenece, String exigencia, String descripcion) {
-        this.fecha = fecha;
+    public Report(long numero, String sexoVoz, String acento, String pertenece, String exigencia, String descripcion) {
+
         this.numero = numero;
         this.sexoVoz = sexoVoz;
         this.acento = acento;
@@ -39,6 +38,7 @@ public class Report implements java.io.Serializable {
         this.descripcion = descripcion;
     }
    
+    
 
     public Report() {
 
@@ -55,14 +55,6 @@ public class Report implements java.io.Serializable {
         this.id = id;
     }
          
-    @Column(name = "FECHA")
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
 
     @Column(name = "NUMERO")
     public long getNumero() {

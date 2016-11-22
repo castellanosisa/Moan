@@ -22,9 +22,9 @@ import javax.persistence.Table;
 public class User implements java.io.Serializable {
 
 
-    private long numero;
-    private long imei;
-    private long simcard;
+    private String numero;
+    private String imei;
+    private String simcard;
     private Set<Report> myReports;
 
     public User() {
@@ -32,37 +32,36 @@ public class User implements java.io.Serializable {
     
     @Id
     @Column(name = "NUMERO")
-    public long getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(long numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
     @Column(name = "IMEI")
-    public long getImei() {
+    public String getImei() {
         return imei;
     }
 
-    public void setImei(long imei) {
+    public void setImei(String imei) {
         this.imei = imei;
     }
 
     @Column(name = "SIMCARD")
-    public long getSimcard() {
+    public String getSimcard() {
         return simcard;
     }
 
-    public void setSimcard(long simcard) {
+    public void setSimcard(String simcard) {
         this.simcard = simcard;
     }
 
     @OneToMany(cascade = CascadeType.ALL)
     @PrePersist
     @PreUpdate
-    @JoinColumns({
-    @JoinColumn(name = "USUARIO_ID", nullable = false)})
+    @JoinColumns({@JoinColumn(name="USUARIO_ID", nullable=false)})
     public Set<Report> getMyReports() {
         return myReports;
     }

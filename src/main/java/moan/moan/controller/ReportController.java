@@ -39,7 +39,7 @@ public class ReportController {
     }
 
     @RequestMapping(value = "/{idUsuario}", method = RequestMethod.GET)
-    public Set<Report> getReportById(@PathVariable("idUsuario") int idUser) {
+    public Set<Report> getReportById(@PathVariable("idUsuario") String idUser) {
         System.out.println("Traer los reportes de ----------------" + idUser);
         Set<Report> reportsUser = new HashSet<>();
         SessionFactory sf = getSessionFactory();
@@ -52,7 +52,7 @@ public class ReportController {
         Set<User> allUsers = new HashSet<>(users);
         Set<Report> allReports = new HashSet<>(reports);
         for (User t : allUsers) {
-            if (t.getNumero()== idUser) {
+            if (t.getNumero().equals(idUser)) {
                 reportsUser = t.getMyReports();
             }
         }
@@ -68,7 +68,7 @@ public class ReportController {
         Session s = sf.openSession();
         Transaction tx = s.beginTransaction();       
         
-        Report rep = new Report(report.getFecha(), report.getNumero(), report.getSexoVoz(), report.getAcento(), report.getPertenece(), report.getExigencia(), report.getDescripcion());
+        Report rep = new Report(report.getNumero(), report.getSexoVoz(), report.getAcento(), report.getPertenece(), report.getExigencia(), report.getDescripcion());
 
         s.save(rep);
         tx.commit();
