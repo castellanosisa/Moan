@@ -21,16 +21,17 @@ import javax.persistence.Table;
 @Table(name = "USUARIOS")
 public class User implements java.io.Serializable {
 
-
     private String numero;
     private String imei;
     private String simcard;
+    private int activo;
     private Set<Report> myReports;
 
     public User() {
+        
     }
     
-    @Id
+
     @Column(name = "NUMERO")
     public String getNumero() {
         return numero;
@@ -39,7 +40,8 @@ public class User implements java.io.Serializable {
     public void setNumero(String numero) {
         this.numero = numero;
     }
-
+    
+    @Id
     @Column(name = "IMEI")
     public String getImei() {
         return imei;
@@ -58,10 +60,20 @@ public class User implements java.io.Serializable {
         this.simcard = simcard;
     }
 
+    @Column(name = "ACTIVO")
+    public int getActivo() {
+        return activo;
+    }
+
+    public void setActivo(int activo) {
+        this.activo = activo;
+    }
+
     @OneToMany(cascade = CascadeType.ALL)
     @PrePersist
     @PreUpdate
-    @JoinColumns({@JoinColumn(name="USUARIO_ID", nullable=false)})
+    @JoinColumns({
+    @JoinColumn(name = "USUARIO_ID", nullable = false)})
     public Set<Report> getMyReports() {
         return myReports;
     }

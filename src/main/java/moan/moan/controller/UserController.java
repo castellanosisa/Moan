@@ -36,9 +36,9 @@ public class UserController {
         return allUsers;
 
     }
-    @RequestMapping(value = "/{idUser}", method = RequestMethod.GET)
-    public User getUserById(@PathVariable("idUser") String idUser) {
-        System.out.println("Traer los reportes de ----------------" + idUser);
+    @RequestMapping(value = "/{imeiUser}", method = RequestMethod.GET)
+    public User getUserById(@PathVariable("imeiUser") String imeiUser) {
+        System.out.println("Traer los reportes de ----------------" + imeiUser);
         User user = new User();
         SessionFactory sf = getSessionFactory();
         Session s = sf.openSession();
@@ -47,7 +47,7 @@ public class UserController {
         List allUsers = criteriaUser.list();
         Set<User> users = new HashSet<>(allUsers);
         for (User t : users) {
-            if (t.getNumero().equals(idUser)) {
+            if (t.getImei().equals(imeiUser)) {
                 user=t;
             }
         }
