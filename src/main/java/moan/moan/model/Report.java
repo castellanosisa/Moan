@@ -28,15 +28,7 @@ public class Report implements java.io.Serializable {
     private String exigencia;
     private String descripcion;
     
-    public Report(String numero, String sexoVoz, String acento, String pertenece, String exigencia, String descripcion) {
 
-        this.numero = numero;
-        this.sexoVoz = sexoVoz;
-        this.acento = acento;
-        this.pertenece = pertenece;
-        this.exigencia = exigencia;
-        this.descripcion = descripcion;
-    }
    
     
 
