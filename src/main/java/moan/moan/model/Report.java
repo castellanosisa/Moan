@@ -20,15 +20,15 @@ import javax.persistence.Table;
 public class Report implements java.io.Serializable {
 
     private long id;
-    private Call llamada;
-    private long numero;
+    private int llamada;
+    private String numero;
     private String sexoVoz;
     private String acento;
     private String pertenece;
     private String exigencia;
     private String descripcion;
     
-    public Report(long numero, String sexoVoz, String acento, String pertenece, String exigencia, String descripcion) {
+    public Report(String numero, String sexoVoz, String acento, String pertenece, String exigencia, String descripcion) {
 
         this.numero = numero;
         this.sexoVoz = sexoVoz;
@@ -45,7 +45,6 @@ public class Report implements java.io.Serializable {
     }  
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID_REPORTE")
     public long getId() {
         return id;
@@ -57,11 +56,11 @@ public class Report implements java.io.Serializable {
          
 
     @Column(name = "NUMERO")
-    public long getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(long numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -111,11 +110,11 @@ public class Report implements java.io.Serializable {
     }
 
     @Column(name = "LLAMADA")
-    public Call getLlamada() {
+    public int getLlamada() {
         return llamada;
     }
 
-    public void setLlamada(Call llamada) {
+    public void setLlamada(int llamada) {
         this.llamada = llamada;
     }
 

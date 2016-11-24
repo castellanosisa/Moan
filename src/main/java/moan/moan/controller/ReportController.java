@@ -68,9 +68,7 @@ public class ReportController {
         Session s = sf.openSession();
         Transaction tx = s.beginTransaction();       
         
-        Report rep = new Report(report.getNumero(), report.getSexoVoz(), report.getAcento(), report.getPertenece(), report.getExigencia(), report.getDescripcion());
-
-        s.save(rep);
+        s.save(report);
         tx.commit();
         s.close();
         sf.close();
